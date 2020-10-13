@@ -1,0 +1,25 @@
+﻿@using GymnasticRoutineDesigner.Models;
+@model List<ElementViewModel>
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Overview</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Creation Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ElementViewModel element in Model)
+        {
+            <tr>
+                <td>@element.Name</td>
+                <td>@element.Worth</td>
+            </tr>
+        }
+    </tbody>
+</table>
