@@ -30,6 +30,15 @@ namespace RoutineDesginerAPI
 
             services.AddDbContext<ApparatusContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Connectionstring")));
+
+            services.AddDbContext<SkillGroupContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Connectionstring")));
+
+            services.AddDbContext<ElementContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Connectionstring")));
+
+            services.AddDbContext<SkillLevelContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Connectionstring")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

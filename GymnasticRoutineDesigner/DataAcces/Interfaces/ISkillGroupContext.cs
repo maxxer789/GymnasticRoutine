@@ -7,6 +7,6 @@ namespace DataAcces.Interfaces
 {
     public interface ISkillGroupContext
     {
-        IReadOnlyList<SkillGroupDTO> GetSkillGroupsFromApparatus(ApparatusDTO apparatus);
+
     }
 }

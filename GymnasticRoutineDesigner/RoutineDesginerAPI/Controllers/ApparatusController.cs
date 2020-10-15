@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DataAcces.Contexts;
 using DataAcces.DTOs;
+using BusinessLogic.Repositories;
+using DataAcces.Interfaces;
+using BusinessLogic.Models;
+using GymnasticRoutineDesigner.Models;
 
 namespace RoutineDesginerAPI.Controllers
 {
@@ -14,97 +18,39 @@ namespace RoutineDesginerAPI.Controllers
     [ApiController]
     public class ApparatusController : ControllerBase
     {
-        private readonly ApparatusContext _context;
+        private readonly ApparatusRepository _Repo;
+
+        private readonly IApparatusContext _Icontext;
 
         public ApparatusController(ApparatusContext context)
         {
-            _context = context;
+            _Icontext = context;
+            _Repo = new ApparatusRepository(_Icontext);
         }
 
         // GET: api/Apparatus
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApparatusDTO>>> GetApparatus()
+        [Route("all"), ActionName("apparatusOverview")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetAllApparatus()
         {
-            return await _context.Apparatus.ToListAsync();
-        }
-
-        // GET: api/Apparatus/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ApparatusDTO>> GetApparatusDTO(int id)
-        {
-            var apparatusDTO = await _context.Apparatus.FindAsync(id);
-
-            if (apparatusDTO == null)
-            {
-                return NotFound();
-            }
-
-            return apparatusDTO;
-        }
-
-        // PUT: api/Apparatus/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutApparatusDTO(int id, ApparatusDTO apparatusDTO)
-        {
-            if (id != apparatusDTO.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(apparatusDTO).State = EntityState.Modified;
-
+            List<ApparatusViewModel> apparatus = new List<ApparatusViewModel>();
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ApparatusDTOExists(id))
+                foreach (Apparatus app in _Repo.GetAllApparatus())
                 {
-                    return NotFound();
+                    apparatus.Add(new ApparatusViewModel(app.Id, app.Name, app.Abbreviation));
                 }
-                else
-                {
-                    throw;
-                }
+                return Ok(apparatus.AsReadOnly());
+
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Apparatus
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<ApparatusDTO>> PostApparatusDTO(ApparatusDTO apparatusDTO)
-        {
-            _context.Apparatus.Add(apparatusDTO);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetApparatusDTO", new { id = apparatusDTO.Id }, apparatusDTO);
-        }
-
-        // DELETE: api/Apparatus/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ApparatusDTO>> DeleteApparatusDTO(int id)
-        {
-            var apparatusDTO = await _context.Apparatus.FindAsync(id);
-            if (apparatusDTO == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
             }
-
-            _context.Apparatus.Remove(apparatusDTO);
-            await _context.SaveChangesAsync();
-
-            return apparatusDTO;
-        }
-
-        private bool ApparatusDTOExists(int id)
-        {
-            return _context.Apparatus.Any(e => e.Id == id);
         }
     }
 }

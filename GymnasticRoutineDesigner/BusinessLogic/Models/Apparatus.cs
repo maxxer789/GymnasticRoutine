@@ -1,5 +1,4 @@
-﻿using DataAcces.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,22 +8,22 @@ namespace BusinessLogic.Models
 {
     public class Apparatus
     {
-        [Key]
         public int Id { get; set; }
-        [Column(TypeName ="nvarchar(10)")]
         public string Name { get; set; }
-        [Column(TypeName = "nvarchar(2)")]
         public string Abbreviation { get; set; }
+
+        public IList<SkillGroup> SkillGroups { get; set; }
 
         public Apparatus()
         {
 
         }
-        public Apparatus(ApparatusDTO dto)
+
+        public Apparatus(int id, string name, string abbreviation)
         {
-            Id = dto.Id;
-            Name = dto.Name;
-            Abbreviation = dto.Abbreviation;
+            Id = id;
+            Name = name;
+            Abbreviation = abbreviation;
         }
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DataAcces.Interfaces
 {
-    public interface IElementContext
+    public interface IApparatusContext
     {
-
+        IReadOnlyList<ApparatusDTO> GetAllApparatus();
     }
 }

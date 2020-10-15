@@ -1,5 +1,4 @@
-﻿using DataAcces.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,11 +14,11 @@ namespace BusinessLogic.Models
         {
 
         }
-        public SkillGroup(SkillGroupDTO dto)
+        public SkillGroup(int id, Apparatus app, string name)
         {
-            Id = dto.Id;
-            Apparatus = new Apparatus(dto.Apparatus);
-            Name = dto.Name;
+            Id = id;
+            Apparatus = app;
+            Name = name;
         }
     }
 }

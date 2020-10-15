@@ -11,9 +11,18 @@ namespace GymnasticRoutineDesigner.Models
         public string Name { get; set; }
         public string Abbreviation { get; set; }
 
+        public IList<SkillGroupViewModel> SkillGroups { get; set; }
+
         public ApparatusViewModel()
         {
 
+        }
+
+        public ApparatusViewModel(int id, string name, string abbreviation)
+        {
+            Id = id;
+            Name = name;
+            Abbreviation = abbreviation;
         }
     }
 }

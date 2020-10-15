@@ -15,6 +15,8 @@ namespace DataAcces.DTOs
         [Column(TypeName = "nvarchar(2)")]
         public string Abbreviation { get; set; }
 
+        public IList<SkillGroupDTO> SkillGroups { get; set; }
+
         public ApparatusDTO()
         {
 

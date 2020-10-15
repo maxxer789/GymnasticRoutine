@@ -1,5 +1,4 @@
-﻿using DataAcces.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,25 +7,27 @@ namespace BusinessLogic.Models
     public class Element
     {
         public int Id { get; }
-        public SkillGroup SkillGroup { get; }
         public int Priority { get; }
         public string Name { get; }
         public string Difficulty { get; }
         public decimal Worth { get; }
+
+        public int SkillGroupId { get; set; }
+        public SkillGroup SkillGroup { get; set; }
 
         public Element()
         {
 
         }
 
-        public Element(ElementDTO dto)
+        public Element(int id, SkillGroup skillGroup, int priority, string name, string difficulty, decimal worth)
         {
-            Id = dto.Id;
-            SkillGroup = new SkillGroup(dto.SkillGroup);
-            Priority = dto.Priority;
-            Name = dto.Name;
-            Difficulty = dto.Difficulty;
-            Worth = dto.Worth;
+            Id = id;
+            SkillGroup = skillGroup;
+            Priority = priority;
+            Name = name;
+            Difficulty = difficulty;
+            Worth = worth;
         }
     }
 }
