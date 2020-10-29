@@ -6,5 +6,6 @@ namespace DataAcces.Interfaces
 {
     public interface ISkillLevelContext
     {
+
     }
 }

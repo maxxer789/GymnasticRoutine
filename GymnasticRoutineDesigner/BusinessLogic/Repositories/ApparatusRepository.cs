@@ -18,9 +18,25 @@ namespace BusinessLogic.Repositories
         public IReadOnlyList<Apparatus> GetAllApparatus()
         {
             List<Apparatus> apparatuses = new List<Apparatus>();
-            foreach(ApparatusDTO app  in _context.GetAllApparatus())
+            foreach (ApparatusDTO app in _context.GetAllApparatus())
             {
-                apparatuses.Add(new Apparatus(app.Id, app.Name, app.Abbreviation));
+                List<SkillGroup> groups = new List<SkillGroup>();
+
+                foreach (SkillGroupDTO sgd in app.SkillGroups)
+                {
+                    groups.Add(new SkillGroup
+                    {
+                        Id = sgd.Id,
+                        Name = sgd.Name
+                    });
+                }
+
+                apparatuses.Add(new Apparatus { 
+                Id = app.Id,
+                Name = app.Name,
+                Abbreviation = app.Abbreviation,
+                SkillGroups = groups
+                });
             }
             return apparatuses;
         }

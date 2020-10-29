@@ -8,12 +8,9 @@ using System.Text;
 
 namespace DataAcces.Contexts
 {
-    public class ApparatusContext:DbContext, IApparatusContext
+    public class ApparatusContext: BaseContext, IApparatusContext
     {
-        public DbSet<ApparatusDTO> Apparatus { get; set; }
-        public DbSet<SkillGroupDTO> SkillGroup { get; set; }
-
-        public ApparatusContext(DbContextOptions<ApparatusContext> options):base(options)
+        public ApparatusContext()
         {
 
         }
@@ -21,7 +18,12 @@ namespace DataAcces.Contexts
 
         public IReadOnlyList<ApparatusDTO> GetAllApparatus()
         {
-            return Apparatus.ToList();
+            List<ApparatusDTO> app = Apparatus.ToList();
+            foreach(ApparatusDTO apd in app)
+            {
+                apd.SkillGroups = SkillGroup.Where(s => s.ApparatusId == apd.Id).ToList();
+            }
+            return app;
         }
     }
 }

@@ -12,18 +12,19 @@ namespace BusinessLogic.Models
         public string Name { get; set; }
         public string Abbreviation { get; set; }
 
-        public IList<SkillGroup> SkillGroups { get; set; }
+        public ICollection<SkillGroup> SkillGroups { get; set; }
 
         public Apparatus()
         {
 
         }
 
-        public Apparatus(int id, string name, string abbreviation)
+        public Apparatus(int id, string name, string abbreviation, List<SkillGroup> skillGroups)
         {
             Id = id;
             Name = name;
             Abbreviation = abbreviation;
+            SkillGroups = skillGroups;
         }
     }
 }

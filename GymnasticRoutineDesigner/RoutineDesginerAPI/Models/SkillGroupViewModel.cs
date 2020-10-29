@@ -8,12 +8,19 @@ namespace GymnasticRoutineDesigner.Models
     public class SkillGroupViewModel
     {
         public int Id { get; set; }
-        public ApparatusViewModel Apparatus { get; set; } = new ApparatusViewModel();
         public string Name { get; set; }
+        public int ApparatusId { get; set; }
 
         public SkillGroupViewModel()
         {
                 
+        }
+
+        public SkillGroupViewModel(int id, string name, int apparatusId)
+        {
+            Id = id;
+            Name = name;
+            ApparatusId = apparatusId;
         }
     }
 }

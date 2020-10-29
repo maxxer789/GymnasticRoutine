@@ -7,18 +7,19 @@ namespace BusinessLogic.Models
     public class SkillGroup
     {
         public int Id { get; set; }
-        public Apparatus Apparatus { get; set; }
         public string Name { get; set; }
+        public int ApparatusId { get; set; }
 
         public SkillGroup()
         {
 
         }
-        public SkillGroup(int id, Apparatus app, string name)
+
+        public SkillGroup(int id, string name, int apparatusId)
         {
             Id = id;
-            Apparatus = app;
             Name = name;
+            ApparatusId = apparatusId;
         }
     }
 }

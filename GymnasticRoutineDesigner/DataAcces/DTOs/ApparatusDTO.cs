@@ -10,16 +10,16 @@ namespace DataAcces.DTOs
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(10)")]
+        [Column(TypeName = "nvarchar(20)")]
         public string Name { get; set; }
         [Column(TypeName = "nvarchar(2)")]
         public string Abbreviation { get; set; }
 
-        public IList<SkillGroupDTO> SkillGroups { get; set; }
+        public virtual ICollection<SkillGroupDTO> SkillGroups { get; set; }
 
         public ApparatusDTO()
         {
-
+            SkillGroups = new List<SkillGroupDTO>();
         }
 
         public ApparatusDTO(int id, string name, string abbreviation)

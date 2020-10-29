@@ -11,6 +11,7 @@ using BusinessLogic.Repositories;
 using DataAcces.Interfaces;
 using BusinessLogic.Models;
 using GymnasticRoutineDesigner.Models;
+using RoutineDesginerAPI.Models.ViewModelConverter;
 
 namespace RoutineDesginerAPI.Controllers
 {
@@ -22,9 +23,9 @@ namespace RoutineDesginerAPI.Controllers
 
         private readonly IApparatusContext _Icontext;
 
-        public ApparatusController(ApparatusContext context)
+        public ApparatusController()
         {
-            _Icontext = context;
+            _Icontext = new ApparatusContext();
             _Repo = new ApparatusRepository(_Icontext);
         }
 
@@ -41,7 +42,16 @@ namespace RoutineDesginerAPI.Controllers
             {
                 foreach (Apparatus app in _Repo.GetAllApparatus())
                 {
-                    apparatus.Add(new ApparatusViewModel(app.Id, app.Name, app.Abbreviation));
+                    List<SkillGroupViewModel> sgvms = new List<SkillGroupViewModel>();
+                    foreach(SkillGroup sg in app.SkillGroups)
+                    {
+                        sgvms.Add(new SkillGroupViewModel
+                        {
+                            Id = sg.Id,
+                            Name = sg.Name
+                        });
+                    }
+                    apparatus.Add(new ApparatusViewModel(app.Id, app.Name, app.Abbreviation, sgvms));
                 }
                 return Ok(apparatus.AsReadOnly());
 

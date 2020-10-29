@@ -9,10 +9,9 @@ using System.Text;
 
 namespace DataAcces.Contexts
 {
-    public class ElementContext : DbContext, IElementContext
+    public class ElementContext : BaseContext, IElementContext
     {
-        public DbSet<ElementDTO> Element { get; set; }
-        public ElementContext(DbContextOptions<ElementContext> options):base(options)
+        public ElementContext()
         {
 
         }

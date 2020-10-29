@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataAcces.Migrations.SkillGroup
+namespace DataAcces.Migrations
 {
-    [DbContext(typeof(SkillGroupContext))]
-    [Migration("20201015150526_SkillGroupMig")]
-    partial class SkillGroupMig
+    [DbContext(typeof(BaseContext))]
+    [Migration("20201029151429_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,11 @@ namespace DataAcces.Migrations.SkillGroup
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApparatusDTO");
+                    b.ToTable("Apparatus");
                 });
 
             modelBuilder.Entity("DataAcces.DTOs.ElementDTO", b =>
@@ -67,6 +67,56 @@ namespace DataAcces.Migrations.SkillGroup
                     b.ToTable("Element");
                 });
 
+            modelBuilder.Entity("DataAcces.DTOs.RoutineDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ApparatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SkillLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Worth")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApparatusId");
+
+                    b.HasIndex("SkillLevelId");
+
+                    b.ToTable("Routine");
+                });
+
+            modelBuilder.Entity("DataAcces.DTOs.RoutineElementDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ElementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoutineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ElementId");
+
+                    b.HasIndex("RoutineId");
+
+                    b.ToTable("RoutineElement");
+                });
+
             modelBuilder.Entity("DataAcces.DTOs.SkillGroupDTO", b =>
                 {
                     b.Property<int>("Id")
@@ -87,11 +137,56 @@ namespace DataAcces.Migrations.SkillGroup
                     b.ToTable("SkillGroup");
                 });
 
+            modelBuilder.Entity("DataAcces.DTOs.SkillLevelDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SkillLevel");
+                });
+
             modelBuilder.Entity("DataAcces.DTOs.ElementDTO", b =>
                 {
                     b.HasOne("DataAcces.DTOs.SkillGroupDTO", "SkillGroup")
                         .WithMany("Elements")
                         .HasForeignKey("SkillGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAcces.DTOs.RoutineDTO", b =>
+                {
+                    b.HasOne("DataAcces.DTOs.ApparatusDTO", "Apparatus")
+                        .WithMany()
+                        .HasForeignKey("ApparatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAcces.DTOs.SkillLevelDTO", "SkillLevel")
+                        .WithMany()
+                        .HasForeignKey("SkillLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAcces.DTOs.RoutineElementDTO", b =>
+                {
+                    b.HasOne("DataAcces.DTOs.ElementDTO", "Element")
+                        .WithMany()
+                        .HasForeignKey("ElementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAcces.DTOs.RoutineDTO", "Routine")
+                        .WithMany("Element")
+                        .HasForeignKey("RoutineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

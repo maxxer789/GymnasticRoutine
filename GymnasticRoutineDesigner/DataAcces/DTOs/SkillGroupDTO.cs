@@ -10,13 +10,13 @@ namespace DataAcces.DTOs
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string Name { get; set; }
         public int ApparatusId { get; set; }
+        [ForeignKey("ApparatusId")]
+        public virtual ApparatusDTO Apparatus { get; set; }
 
-        public ApparatusDTO Apparatus { get; set; }
-
-        public IList<ElementDTO> Elements { get; set; }
+        public virtual ICollection<ElementDTO> Elements { get; set; }
 
         public SkillGroupDTO()
         {

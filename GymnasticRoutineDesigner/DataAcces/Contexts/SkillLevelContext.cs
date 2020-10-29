@@ -7,12 +7,9 @@ using System.Text;
 
 namespace DataAcces.Contexts
 {
-    public class SkillLevelContext: DbContext, ISkillLevelContext
+    public class SkillLevelContext: BaseContext, ISkillLevelContext
     {
-        public DbSet<SkillLevelDTO> SkillLevel { get; set; }
-        public DbSet<ApparatusDTO> Apparatus { get; set; }
-
-        public SkillLevelContext(DbContextOptions<SkillLevelContext> options) : base(options)
+        public SkillLevelContext()
         {
 
         }

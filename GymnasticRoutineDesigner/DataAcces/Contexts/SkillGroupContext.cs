@@ -9,11 +9,9 @@ using System.Text;
 
 namespace DataAcces.Contexts
 {
-    public class SkillGroupContext : DbContext, ISkillGroupContext
+    public class SkillGroupContext : BaseContext, ISkillGroupContext
     {
-        public DbSet<SkillGroupDTO> SkillGroup { get; set; }
-        public DbSet<ElementDTO> Element { get; set; }
-        public SkillGroupContext(DbContextOptions<SkillGroupContext> options) : base(options)
+        public SkillGroupContext()
         {
 
         }

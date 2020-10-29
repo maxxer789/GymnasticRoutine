@@ -20,7 +20,8 @@ namespace DataAcces.DTOs
         public decimal Worth { get; set; }
 
         public int SkillGroupId { get; set; }
-        public SkillGroupDTO SkillGroup { get; set; }
+        [ForeignKey("SkillGroupId")]
+        public virtual SkillGroupDTO SkillGroup { get; set; }
 
         public ElementDTO()
         {
