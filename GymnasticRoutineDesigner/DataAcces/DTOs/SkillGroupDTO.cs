@@ -17,19 +17,5 @@ namespace DataAcces.DTOs
         public virtual ApparatusDTO Apparatus { get; set; }
 
         public virtual ICollection<ElementDTO> Elements { get; set; }
-
-        public SkillGroupDTO()
-        {
-
-        }
-
-        public SkillGroupDTO(int id, ApparatusDTO apparatus, string name)
-        {
-            Id = id;
-            Apparatus.Id = apparatus.Id;
-            Apparatus.Name = apparatus.Name;
-            Apparatus.Abbreviation = apparatus.Abbreviation;
-            Name = name;
-        }
     }
 }

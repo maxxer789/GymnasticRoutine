@@ -11,7 +11,7 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
     {
         public static SkillGroupViewModel SkillGroupToViewModel(SkillGroup sg)
         {
-            return new SkillGroupViewModel(sg.Id, sg.Name, sg.ApparatusId);
+            return new SkillGroupViewModel(sg.Id, sg.Name, sg.Apparatus);
         }
 
         public static List<SkillGroupViewModel> SkillGroupToViewModel (List<SkillGroup> sgs)

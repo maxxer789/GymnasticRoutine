@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.Collections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,7 @@ namespace BusinessLogic.Models
 
         public Apparatus()
         {
-
+            SkillGroups = new List<SkillGroup>();
         }
 
         public Apparatus(int id, string name, string abbreviation, List<SkillGroup> skillGroups)

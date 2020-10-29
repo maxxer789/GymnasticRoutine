@@ -22,20 +22,5 @@ namespace DataAcces.DTOs
         public int SkillGroupId { get; set; }
         [ForeignKey("SkillGroupId")]
         public virtual SkillGroupDTO SkillGroup { get; set; }
-
-        public ElementDTO()
-        {
-
-        }
-
-        public ElementDTO(int id, SkillGroupDTO skillGroup, int priority, string name, string difficulty, decimal worth)
-        {
-            Id = id;
-            SkillGroup = skillGroup;
-            Priority = priority;
-            Name = name;
-            Difficulty = difficulty;
-            Worth = worth;
-        }
     }
 }

@@ -9,18 +9,18 @@ namespace GymnasticRoutineDesigner.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ApparatusId { get; set; }
+        public ICollection<ElementViewModel> Elements { get; set; }
 
         public SkillGroupViewModel()
         {
-                
+            Elements = new List<ElementViewModel>();
         }
 
-        public SkillGroupViewModel(int id, string name, int apparatusId)
+        public SkillGroupViewModel(int id, string name, ICollection<ElementViewModel> elements)
         {
             Id = id;
             Name = name;
-            ApparatusId = apparatusId;
+            Elements = elements;
         }
     }
 }

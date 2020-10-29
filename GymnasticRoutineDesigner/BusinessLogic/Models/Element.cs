@@ -12,12 +12,11 @@ namespace BusinessLogic.Models
         public string Difficulty { get; }
         public decimal Worth { get; }
 
-        public int SkillGroupId { get; set; }
         public SkillGroup SkillGroup { get; set; }
 
         public Element()
         {
-
+            SkillGroup = new SkillGroup();
         }
 
         public Element(int id, SkillGroup skillGroup, int priority, string name, string difficulty, decimal worth)

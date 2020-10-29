@@ -13,11 +13,10 @@ namespace GymnasticRoutineDesigner.Models
         public string Difficulty { get; }
         public decimal Worth { get; }
 
-        public int SkillGroupId { get; set; }
-        public SkillGroupViewModel SkillGroup { get; set; } = new SkillGroupViewModel();
+        public SkillGroupViewModel SkillGroup { get; set; } 
         public ElementViewModel()
         {
-
+            SkillGroup = new SkillGroupViewModel();
         }
     }
 }
