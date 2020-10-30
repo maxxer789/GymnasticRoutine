@@ -8,7 +8,6 @@ namespace BusinessLogic.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Apparatus Apparatus { get; set; }
         public ICollection<Element> Elements { get; set; }
 
         public SkillGroup()
@@ -16,11 +15,10 @@ namespace BusinessLogic.Models
 
         }
 
-        public SkillGroup(int id, string name, Apparatus apparatus, ICollection<Element> elements)
+        public SkillGroup(int id, string name, ICollection<Element> elements)
         {
             Id = id;
             Name = name;
-            Apparatus = apparatus;
             Elements = elements;
         }
     }

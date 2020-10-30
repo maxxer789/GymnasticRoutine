@@ -43,16 +43,22 @@ namespace RoutineDesginerAPI.Controllers
                 foreach (Apparatus app in _Repo.GetAllApparatus())
                 {
                     List<SkillGroupViewModel> sgvms = new List<SkillGroupViewModel>();
+
                     foreach(SkillGroup sg in app.SkillGroups)
                     {
-                        sgvms.Add(new SkillGroupViewModel
+                        List<ElementViewModel> evms = new List<ElementViewModel>();
+
+                        foreach(Element e in sg.Elements)
                         {
-                            Id = sg.Id,
-                            Name = sg.Name
-                        });
+                            evms.Add(new ElementViewModel(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
+                        }
+
+                        sgvms.Add(new SkillGroupViewModel(sg.Id, sg.Name, evms));
                     }
+
                     apparatus.Add(new ApparatusViewModel(app.Id, app.Name, app.Abbreviation, sgvms));
                 }
+
                 return Ok(apparatus.AsReadOnly());
 
             }

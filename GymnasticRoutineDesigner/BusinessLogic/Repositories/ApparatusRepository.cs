@@ -24,19 +24,17 @@ namespace BusinessLogic.Repositories
 
                 foreach (SkillGroupDTO sgd in app.SkillGroups)
                 {
-                    groups.Add(new SkillGroup
+                    List<Element> elements = new List<Element>();
+
+                    foreach(ElementDTO ed in sgd.Elements)
                     {
-                        Id = sgd.Id,
-                        Name = sgd.Name
-                    });
+                        elements.Add(new Element(ed.Id, ed.Priority, ed.Name, ed.Difficulty, ed.Worth));
+                    }
+
+                    groups.Add(new SkillGroup(sgd.Id, sgd.Name, elements));
                 }
 
-                apparatuses.Add(new Apparatus { 
-                Id = app.Id,
-                Name = app.Name,
-                Abbreviation = app.Abbreviation,
-                SkillGroups = groups
-                });
+                apparatuses.Add(new Apparatus(app.Id, app.Name, app.Abbreviation, groups));
             }
             return apparatuses;
         }

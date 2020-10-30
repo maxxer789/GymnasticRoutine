@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RoutineDesginerAPI.Extension;
 
 namespace RoutineDesginerAPI
 {
@@ -26,6 +27,7 @@ namespace RoutineDesginerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureCors();
             services.AddControllers();
         }
 
@@ -38,6 +40,10 @@ namespace RoutineDesginerAPI
             }
 
             app.UseRouting();
+
+            app.UseCors("CorsDevelopment");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

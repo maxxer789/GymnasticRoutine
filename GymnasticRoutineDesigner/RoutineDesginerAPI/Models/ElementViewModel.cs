@@ -7,16 +7,24 @@ namespace GymnasticRoutineDesigner.Models
 {
     public class ElementViewModel
     {
-        public int Id { get; }
-        public int Priority { get; }
-        public string Name { get; }
-        public string Difficulty { get; }
-        public decimal Worth { get; }
+        public int Id { get; set; }
+        public int Priority { get; set; }
+        public string Name { get; set; }
+        public string Difficulty { get; set; }
+        public decimal Worth { get; set; }
 
-        public SkillGroupViewModel SkillGroup { get; set; } 
         public ElementViewModel()
         {
-            SkillGroup = new SkillGroupViewModel();
+
+        }
+
+        public ElementViewModel(int id, int priority, string name, string difficulty, decimal worth)
+        {
+            Id = id;
+            Priority = priority;
+            Name = name;
+            Difficulty = difficulty;
+            Worth = worth;
         }
     }
 }

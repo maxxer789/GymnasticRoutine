@@ -15,13 +15,16 @@ namespace DataAcces.Contexts
 
         }
 
-
         public IReadOnlyList<ApparatusDTO> GetAllApparatus()
         {
             List<ApparatusDTO> app = Apparatus.ToList();
             foreach(ApparatusDTO apd in app)
             {
                 apd.SkillGroups = SkillGroup.Where(s => s.ApparatusId == apd.Id).ToList();
+                foreach(SkillGroupDTO sgd in apd.SkillGroups)
+                {
+                    sgd.Elements = Element.Where(e => e.SkillGroupId == sgd.Id).ToList();
+                }
             }
             return app;
         }
