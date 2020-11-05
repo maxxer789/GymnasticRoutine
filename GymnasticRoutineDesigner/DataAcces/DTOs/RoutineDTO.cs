@@ -20,5 +20,10 @@ namespace DataAcces.DTOs
         public virtual SkillLevelDTO SkillLevel { get; set; }
 
         public virtual ICollection<RoutineElementDTO> Element { get; set; }
+
+        public RoutineDTO()
+        {
+
+        }
     }
 }

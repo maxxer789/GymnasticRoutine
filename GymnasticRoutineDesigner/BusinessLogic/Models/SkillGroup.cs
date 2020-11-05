@@ -12,7 +12,7 @@ namespace BusinessLogic.Models
 
         public SkillGroup()
         {
-
+            Elements = new List<Element>();
         }
 
         public SkillGroup(int id, string name, ICollection<Element> elements)

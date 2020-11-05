@@ -15,21 +15,21 @@ using RoutineDesginerAPI.Models.ViewModelConverter;
 
 namespace RoutineDesginerAPI.Controllers
 {
+    // api/Apparatus
     [Route("api/[controller]")]
     [ApiController]
     public class ApparatusController : ControllerBase
     {
         private readonly ApparatusRepository _Repo;
 
-        private readonly IApparatusContext _Icontext;
+        private readonly IApparatusContext _Context;
 
         public ApparatusController()
         {
-            _Icontext = new ApparatusContext();
-            _Repo = new ApparatusRepository(_Icontext);
+            _Context = new ApparatusContext();
+            _Repo = new ApparatusRepository(_Context);
         }
 
-        // GET: api/Apparatus
         [HttpGet]
         [Route("all"), ActionName("apparatusOverview")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -37,30 +37,49 @@ namespace RoutineDesginerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetAllApparatus()
         {
-            List<ApparatusViewModel> apparatus = new List<ApparatusViewModel>();
             try
             {
-                foreach (Apparatus app in _Repo.GetAllApparatus())
-                {
-                    List<SkillGroupViewModel> sgvms = new List<SkillGroupViewModel>();
-
-                    foreach(SkillGroup sg in app.SkillGroups)
-                    {
-                        List<ElementViewModel> evms = new List<ElementViewModel>();
-
-                        foreach(Element e in sg.Elements)
-                        {
-                            evms.Add(new ElementViewModel(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
-                        }
-
-                        sgvms.Add(new SkillGroupViewModel(sg.Id, sg.Name, evms));
-                    }
-
-                    apparatus.Add(new ApparatusViewModel(app.Id, app.Name, app.Abbreviation, sgvms));
-                }
-
+                List<ApparatusViewModel> apparatus = ViewModelConverter.ApparatusToViewModel(_Repo.GetAllApparatus().ToList());
+                
                 return Ok(apparatus.AsReadOnly());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
+        [HttpGet]
+        [Route("ApparatusById"), ActionName("ApparatusById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetApparatusById(int Id)
+        {
+            try
+            {
+                ApparatusViewModel app = ViewModelConverter.ApparatusToViewModel(_Repo.GetApparatusById(Id));
+                return Ok(app);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        [Route("SkillGroups"), ActionName("SkillGroupsFromApparatus")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetSkillGroupsFromApparatus(ApparatusViewModel app)
+        {
+            try
+            {
+                app = ViewModelConverter.ApparatusToViewModel(_Repo.GetSkillGroupsFromApparatus(ViewModelConverter.ApparatusViewModelToApparatus(app)));
+                return Ok(app);
             }
             catch (Exception ex)
             {

@@ -1,8 +1,11 @@
 ﻿using BusinessLogic.Models;
+using BusinessLogic.Models.Converter;
 using DataAcces.DTOs;
 using DataAcces.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace BusinessLogic.Repositories
@@ -14,16 +17,9 @@ namespace BusinessLogic.Repositories
         {
             _Context = context;
         }
-
-        //public IReadOnlyList<SkillGroup> GetSkillGroupsFromApparatus(ApparatusDTO apparatus)
-        //{
-        //    IReadOnlyList<SkillGroupDTO> skillGroupDTOs = _Context.GetSkillGroupsFromApparatus(apparatus);
-        //    List<SkillGroup> skillGroups = new List<SkillGroup>();
-        //    foreach (SkillGroupDTO dto in skillGroupDTOs)
-        //    {
-        //        skillGroups.Add(new SkillGroup(dto.Id, new Apparatus(dto.Apparatus.Id, dto.Apparatus.Name, dto.Apparatus.Abbreviation), dto.Name));
-        //    }
-        //    return _Context.GetSkillGroupsFromApparatus(apparatus);
-        //}
+        public IReadOnlyList<SkillGroup> GetAllSkillGroups()
+        {
+            return DTOModelConverter.SkillGroupDTOToModel(_Context.GetAllSkillGroups().ToList());
+        }
     }
 }

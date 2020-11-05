@@ -17,5 +17,16 @@ namespace DataAcces.DTOs
         public virtual ApparatusDTO Apparatus { get; set; }
 
         public virtual ICollection<ElementDTO> Elements { get; set; }
+
+        public SkillGroupDTO()
+        {
+
+        }
+        public SkillGroupDTO(int id, string name, ICollection<ElementDTO> elements)
+        {
+            Id = id;
+            Name = name;
+            Elements = elements;
+        }
     }
 }

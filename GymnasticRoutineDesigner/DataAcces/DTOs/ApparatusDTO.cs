@@ -16,5 +16,18 @@ namespace DataAcces.DTOs
         public string Abbreviation { get; set; }
 
         public virtual ICollection<SkillGroupDTO> SkillGroups { get; set; }
+        public ApparatusDTO()
+        {
+
+        }
+
+        public ApparatusDTO(int id, string name, string abbreviation, ICollection<SkillGroupDTO> skillGroups)
+        {
+            Id = id;
+            Name = name;
+            Abbreviation = abbreviation;
+            SkillGroups = skillGroups;
+        }
+
     }
 }

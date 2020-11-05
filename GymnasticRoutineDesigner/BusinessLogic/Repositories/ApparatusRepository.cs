@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BusinessLogic.Models;
+using BusinessLogic.Models.Converter;
 using DataAcces.DTOs;
 using DataAcces.Interfaces;
 
@@ -9,34 +11,23 @@ namespace BusinessLogic.Repositories
 {
     public class ApparatusRepository
     {
-        private readonly IApparatusContext _context;
+        private readonly IApparatusContext _Context;
         public ApparatusRepository(IApparatusContext context)
         {
-            _context = context;
+            _Context = context;
         }
 
+        public Apparatus GetApparatusById(int id)
+        {
+            return DTOModelConverter.ApparatusDTOToModel(_Context.GetApparatusById(id));
+        }
         public IReadOnlyList<Apparatus> GetAllApparatus()
         {
-            List<Apparatus> apparatuses = new List<Apparatus>();
-            foreach (ApparatusDTO app in _context.GetAllApparatus())
-            {
-                List<SkillGroup> groups = new List<SkillGroup>();
-
-                foreach (SkillGroupDTO sgd in app.SkillGroups)
-                {
-                    List<Element> elements = new List<Element>();
-
-                    foreach(ElementDTO ed in sgd.Elements)
-                    {
-                        elements.Add(new Element(ed.Id, ed.Priority, ed.Name, ed.Difficulty, ed.Worth));
-                    }
-
-                    groups.Add(new SkillGroup(sgd.Id, sgd.Name, elements));
-                }
-
-                apparatuses.Add(new Apparatus(app.Id, app.Name, app.Abbreviation, groups));
-            }
-            return apparatuses;
+            return DTOModelConverter.ApparatusDTOToModel(_Context.GetAllApparatus().ToList());
+        }
+        public Apparatus GetSkillGroupsFromApparatus(Apparatus app)
+        {
+            return DTOModelConverter.ApparatusDTOToModel(_Context.GetSkillGroupsFromApparatus(DTOModelConverter.ModelToApparatusDTO(app)));
         }
     }
 }
