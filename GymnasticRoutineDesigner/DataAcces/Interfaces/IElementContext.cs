@@ -7,6 +7,7 @@ namespace DataAcces.Interfaces
 {
     public interface IElementContext
     {
-
+        ElementDTO Create(ElementDTO El);
+        ElementDTO GetById(int Id);
     }
 }

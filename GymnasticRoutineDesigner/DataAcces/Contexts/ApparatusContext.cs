@@ -10,7 +10,7 @@ namespace DataAcces.Contexts
 {
     public class ApparatusContext : BaseContext, IApparatusContext
     {
-        public ApparatusDTO GetApparatusById(int Id)
+        public ApparatusDTO GetById(int Id)
         {
             ApparatusDTO app = Apparatus.ToList().Find(a => a.Id == Id);
 
@@ -19,7 +19,7 @@ namespace DataAcces.Contexts
             return app;
         }
 
-        public IReadOnlyList<ApparatusDTO> GetAllApparatus()
+        public IReadOnlyList<ApparatusDTO> GetAll()
         {
             List<ApparatusDTO> app = Apparatus.ToList();
 
@@ -30,7 +30,7 @@ namespace DataAcces.Contexts
 
             return app;
         }
-        public ApparatusDTO GetSkillGroupsFromApparatus(ApparatusDTO app)
+        public ApparatusDTO GetSkillGroups(ApparatusDTO app)
         {
             app.SkillGroups = FillSkillGroups(app);
 

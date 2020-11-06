@@ -17,7 +17,7 @@ namespace DataAcces.Contexts
 
         }
 
-        public IReadOnlyList<SkillGroupDTO> GetAllSkillGroups()
+        public IReadOnlyList<SkillGroupDTO> GetAll()
         {
             List<SkillGroupDTO> groups = SkillGroup.ToList();
             foreach(SkillGroupDTO sg in groups)

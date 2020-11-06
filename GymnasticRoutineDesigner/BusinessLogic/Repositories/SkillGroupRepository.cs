@@ -17,9 +17,9 @@ namespace BusinessLogic.Repositories
         {
             _Context = context;
         }
-        public IReadOnlyList<SkillGroup> GetAllSkillGroups()
+        public IReadOnlyList<SkillGroup> GetAll()
         {
-            return DTOModelConverter.SkillGroupDTOToModel(_Context.GetAllSkillGroups().ToList());
+            return DTOModelConverter.SkillGroupDTOToModel(_Context.GetAll().ToList());
         }
     }
 }

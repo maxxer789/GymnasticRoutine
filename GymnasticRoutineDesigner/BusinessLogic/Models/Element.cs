@@ -6,11 +6,11 @@ namespace BusinessLogic.Models
 {
     public class Element
     {
-        public int Id { get; }
-        public int Priority { get; }
-        public string Name { get; }
-        public string Difficulty { get; }
-        public decimal Worth { get; }
+        public int Id { get; set; }
+        public int Priority { get; set; }
+        public string Name { get; set; }
+        public string Difficulty { get; set; }
+        public decimal Worth { get; set; }
 
 
         public Element()

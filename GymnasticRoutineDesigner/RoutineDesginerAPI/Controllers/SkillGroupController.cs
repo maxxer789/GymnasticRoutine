@@ -12,6 +12,7 @@ using RoutineDesginerAPI.Models.ViewModelConverter;
 
 namespace RoutineDesginerAPI.Controllers
 {
+    //api/skillgroup
     [Route("api/[controller]")]
     [ApiController]
     public class SkillGroupController : ControllerBase
@@ -26,17 +27,16 @@ namespace RoutineDesginerAPI.Controllers
             _Repo = new SkillGroupRepository(_Context);
         }
 
-        // GET: api/SkillGroup
         [HttpGet]
-        [Route("all"), ActionName("skillgroupOverview")]
+        [Route("all"), ActionName("skillGroupOverview")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetAllSkillgroups()
+        public IActionResult GetAll()
         {
             try
             {
-                List<SkillGroupViewModel> skillGroups = ViewModelConverter.SkillGroupToViewModel(_Repo.GetAllSkillGroups().ToList());
+                List<SkillGroupViewModel> skillGroups = ViewModelConverter.SkillGroupToViewModel(_Repo.GetAll().ToList());
                 return Ok(skillGroups.AsReadOnly());
             }
             catch(Exception ex)

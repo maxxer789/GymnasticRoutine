@@ -39,7 +39,7 @@ namespace RoutineDesginerAPI.Controllers
         {
             try
             {
-                List<ApparatusViewModel> apparatus = ViewModelConverter.ApparatusToViewModel(_Repo.GetAllApparatus().ToList());
+                List<ApparatusViewModel> apparatus = ViewModelConverter.ApparatusToViewModel(_Repo.GetAll().ToList());
                 
                 return Ok(apparatus.AsReadOnly());
             }
@@ -59,7 +59,7 @@ namespace RoutineDesginerAPI.Controllers
         {
             try
             {
-                ApparatusViewModel app = ViewModelConverter.ApparatusToViewModel(_Repo.GetApparatusById(Id));
+                ApparatusViewModel app = ViewModelConverter.ApparatusToViewModel(_Repo.GetById(Id));
                 return Ok(app);
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace RoutineDesginerAPI.Controllers
         {
             try
             {
-                app = ViewModelConverter.ApparatusToViewModel(_Repo.GetSkillGroupsFromApparatus(ViewModelConverter.ApparatusViewModelToApparatus(app)));
+                app = ViewModelConverter.ApparatusToViewModel(_Repo.GetSkillGroups(ViewModelConverter.ApparatusViewModelToApparatus(app)));
                 return Ok(app);
             }
             catch (Exception ex)
