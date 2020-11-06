@@ -61,7 +61,7 @@ namespace RoutineDesginerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateElement([FromForm] ElementCreateViewModel ecvm)
+        public IActionResult CreateElement([FromBody] ElementCreateViewModel ecvm)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace RoutineDesginerAPI.Controllers
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(new Element { Name = ecvm.Name, Difficulty = ecvm.Difficulty, Priority = ecvm.Priority, Worth = ecvm.Worth }));
+                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(new Element { Name = ecvm.Name, Difficulty = ecvm.Difficulty, Priority = ecvm.Priority, SkillGroupId = ecvm.SkillGroupId, Worth = ecvm.Worth }));
                 return CreatedAtAction("elementById", new { id = createdElement.Id }, createdElement);
             }
             catch(Exception ex)

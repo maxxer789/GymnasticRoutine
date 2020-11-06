@@ -70,28 +70,28 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         #region Element
         public static ElementViewModel ElementToViewModel(Element el)
         {
-            return new ElementViewModel(el.Id, el.Priority, el.Name, el.Difficulty, el.Worth);
+            return new ElementViewModel(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
         }
         public static List<ElementViewModel> ElementToViewModel(List<Element> el)
         {
             List<ElementViewModel> elements = new List<ElementViewModel>();
             foreach(Element e in el)
             {
-                elements.Add(new ElementViewModel(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new ElementViewModel(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
             }
             return elements;
         }
 
         public static Element ElementViewModelToElement(ElementViewModel el)
         {
-            return new Element(el.Id, el.Priority, el.Name, el.Difficulty, el.Worth);
+            return new Element(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
         }
         public static List<Element> ElementViewModelToElement(List<ElementViewModel> el)
         {
             List<Element> elements = new List<Element>();
             foreach(ElementViewModel e in el)
             {
-                elements.Add(new Element(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new Element(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
             }
             return elements;
         }

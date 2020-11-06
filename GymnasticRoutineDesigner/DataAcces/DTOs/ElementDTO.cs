@@ -27,10 +27,11 @@ namespace DataAcces.DTOs
         {
 
         }
-        public ElementDTO(int id, int priority, string name, string difficulty, decimal worth)
+        public ElementDTO(int id, int priority, int skillGroupId, string name, string difficulty, decimal worth)
         {
             Id = id;
             Priority = priority;
+            SkillGroupId = skillGroupId;
             Name = name;
             Difficulty = difficulty;
             Worth = worth;
