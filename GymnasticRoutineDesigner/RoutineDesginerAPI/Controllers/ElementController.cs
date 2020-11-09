@@ -30,19 +30,19 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("byId/{id}"), ActionName("elementById")]
+        [Route("byId/{Id}"), ActionName("elementById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetElementById(int id)
+        public IActionResult GetElementById(int Id)
         {
             try
             {
-                if (id <= 0)
+                if (Id <= 0)
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                ElementViewModel element = ViewModelConverter.ElementToViewModel(_Repo.GetById(id));
+                ElementViewModel element = ViewModelConverter.ElementToViewModel(_Repo.GetById(Id));
                 if (element == null)
                 {
                     return NotFound();

@@ -51,7 +51,7 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("ApparatusById"), ActionName("ApparatusById")]
+        [Route("/{Id}"), ActionName("ApparatusById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -70,7 +70,7 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("SkillGroups"), ActionName("SkillGroupsFromApparatus")]
+        [Route("{app}/skillGroups"), ActionName("SkillGroupsFromApparatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
