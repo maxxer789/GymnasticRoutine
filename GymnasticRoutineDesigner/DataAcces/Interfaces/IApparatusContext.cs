@@ -9,6 +9,6 @@ namespace DataAcces.Interfaces
     {
         ApparatusDTO GetById(int Id);
         IReadOnlyList<ApparatusDTO> GetAll();
-        ApparatusDTO GetSkillGroups(ApparatusDTO app);
+        ApparatusDTO GetSkillGroups(int Id);
     }
 }

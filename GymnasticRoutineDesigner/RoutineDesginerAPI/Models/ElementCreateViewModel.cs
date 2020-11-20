@@ -11,6 +11,6 @@ namespace RoutineDesginerAPI.Models
         public int SkillGroupId { get; set; }
         public string Name { get; set; }
         public string Difficulty { get; set; }
-        public decimal Worth { get; set; }
+        public double Worth { get; set; }
     }
 }

@@ -12,14 +12,14 @@ namespace GymnasticRoutineDesigner.Models
         public int SkillGroupId { get; set; }
         public string Name { get; set; }
         public string Difficulty { get; set; }
-        public decimal Worth { get; set; }
+        public double Worth { get; set; }
 
         public ElementViewModel()
         {
 
         }
 
-        public ElementViewModel(int id, int priority, int skillGroupId, string name, string difficulty, decimal worth)
+        public ElementViewModel(int id, int priority, int skillGroupId, string name, string difficulty, double worth)
         {
             Id = id;
             Priority = priority;

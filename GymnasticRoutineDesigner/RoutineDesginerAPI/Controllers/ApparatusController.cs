@@ -51,7 +51,7 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/{Id}"), ActionName("ApparatusById")]
+        [Route("{Id}"), ActionName("ApparatusById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -70,15 +70,15 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{app}/skillGroups"), ActionName("SkillGroupsFromApparatus")]
+        [Route("{Id}/skillGroups"), ActionName("SkillGroupsFromApparatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetSkillGroupsFromApparatus(ApparatusViewModel app)
+        public IActionResult GetSkillGroupsFromApparatus(int Id)
         {
             try
             {
-                app = ViewModelConverter.ApparatusToViewModel(_Repo.GetSkillGroups(ViewModelConverter.ApparatusViewModelToApparatus(app)));
+                ApparatusViewModel app = ViewModelConverter.ApparatusToViewModel(_Repo.GetSkillGroups(Id));
                 return Ok(app);
             }
             catch (Exception ex)

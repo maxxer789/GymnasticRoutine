@@ -17,17 +17,31 @@ namespace BusinessLogic.Repositories
             _Context = context;
         }
 
-        public Apparatus GetById(int id)
+        public Apparatus GetById(int Id)
         {
-            return DTOModelConverter.ApparatusDTOToModel(_Context.GetById(id));
+            if (Id <= 5)
+            {
+                return DTOModelConverter.ApparatusDTOToModel(_Context.GetById(Id));
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
         public IReadOnlyList<Apparatus> GetAll()
         {
             return DTOModelConverter.ApparatusDTOToModel(_Context.GetAll().ToList());
         }
-        public Apparatus GetSkillGroups(Apparatus app)
+        public Apparatus GetSkillGroups(int Id)
         {
-            return DTOModelConverter.ApparatusDTOToModel(_Context.GetSkillGroups(DTOModelConverter.ModelToApparatusDTO(app)));
+            if (Id <= 5)
+            {
+                return DTOModelConverter.ApparatusDTOToModel(_Context.GetSkillGroups(Id));
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

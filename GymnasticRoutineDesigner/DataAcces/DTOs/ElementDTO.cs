@@ -17,7 +17,7 @@ namespace DataAcces.DTOs
         [Column(TypeName = "nvarchar(2)")]
         public string Difficulty { get; set; }
         [Column(TypeName = "decimal(1,1)")]
-        public decimal Worth { get; set; }
+        public double Worth { get; set; }
 
         public int SkillGroupId { get; set; }
         [ForeignKey("SkillGroupId")]
@@ -27,7 +27,7 @@ namespace DataAcces.DTOs
         {
 
         }
-        public ElementDTO(int id, int priority, int skillGroupId, string name, string difficulty, decimal worth)
+        public ElementDTO(int id, int priority, int skillGroupId, string name, string difficulty, double worth)
         {
             Id = id;
             Priority = priority;

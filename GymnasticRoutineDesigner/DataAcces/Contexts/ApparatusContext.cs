@@ -12,11 +12,17 @@ namespace DataAcces.Contexts
     {
         public ApparatusDTO GetById(int Id)
         {
-            ApparatusDTO app = Apparatus.ToList().Find(a => a.Id == Id);
+            try
+            {
+                ApparatusDTO app = Apparatus.ToList().Find(a => a.Id == Id);
 
-            app.SkillGroups = FillSkillGroups(app);
+                app.SkillGroups = FillSkillGroups(app);
 
-            return app;
+                return app;
+            }catch(NullReferenceException)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         public IReadOnlyList<ApparatusDTO> GetAll()
@@ -30,8 +36,9 @@ namespace DataAcces.Contexts
 
             return app;
         }
-        public ApparatusDTO GetSkillGroups(ApparatusDTO app)
+        public ApparatusDTO GetSkillGroups(int Id)
         {
+            ApparatusDTO app = Apparatus.ToList().Find(a => a.Id == Id);
             app.SkillGroups = FillSkillGroups(app);
 
             return app;

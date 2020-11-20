@@ -11,7 +11,7 @@ namespace BusinessLogic.Models
         public int SkillGroupId { get; set; }
         public string Name { get; set; }
         public string Difficulty { get; set; }
-        public decimal Worth { get; set; }
+        public double Worth { get; set; }
 
 
         public Element()
@@ -19,7 +19,7 @@ namespace BusinessLogic.Models
            
         }
 
-        public Element(int id, int priority, int skillGroupId, string name, string difficulty, decimal worth)
+        public Element(int id, int priority, int skillGroupId, string name, string difficulty, double worth)
         {
             Id = id;
             Priority = priority;
