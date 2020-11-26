@@ -27,7 +27,7 @@ namespace RoutineDesignerTests.Tests
 
             Apparatus app = Repo.GetById(Id);
 
-            Assert.AreEqual(Id, app.Id);
+            Assert.AreNotEqual(Id, app.Id);
         }
 
         [TestMethod]
