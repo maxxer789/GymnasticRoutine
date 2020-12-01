@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RoutineDesginerAPI.Extension;
+using RoutineDesginerAPI.Hubs;
 
 namespace RoutineDesginerAPI
 {
@@ -29,6 +30,8 @@ namespace RoutineDesginerAPI
         {
             services.ConfigureCors();
             services.AddControllers();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +51,8 @@ namespace RoutineDesginerAPI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {   
+                endpoints.MapHub<NotificationHub>("/notification");
                 endpoints.MapControllers();
             });
         }
