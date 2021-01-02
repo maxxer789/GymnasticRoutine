@@ -28,5 +28,12 @@ namespace RoutineDesginerAPI.Controllers
             await _notificationHub.Clients.All.SendAsync("sendToReact", "'The message '" + notification.Message + "' has been recieved'");
             return Ok();
         }
+
+        public async Task<IActionResult> SendNotification(string message)
+        {
+            Notification not = new Notification(message);
+            await _notificationHub.Clients.All.SendAsync("RecieveNotification", not.Message);
+            return Ok();
+        }
     }
 }

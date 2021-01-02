@@ -22,11 +22,8 @@ namespace RoutineDesginerAPI.Controllers
     {
         private readonly ApparatusRepository _Repo;
 
-        private readonly IApparatusContext _Context;
-
-        public ApparatusController()
+        public ApparatusController(IApparatusContext _Context)
         {
-            _Context = new ApparatusContext();
             _Repo = new ApparatusRepository(_Context);
         }
 

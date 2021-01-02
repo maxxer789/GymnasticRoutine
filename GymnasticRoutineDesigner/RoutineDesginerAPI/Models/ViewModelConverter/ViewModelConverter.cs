@@ -96,5 +96,17 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
             return elements;
         }
         #endregion
+        #region Routine
+        //public static RoutineViewModel RoutineToViewModel(Routine rout)
+        //{
+        //    return new ElementViewModel(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+        //}
+
+        public static Routine ViewModelToRoutine(RoutineCreateViewModel rcvm)
+        {
+            return new Routine(rcvm.ApparatusId, )
+        }
+
+        #endregion
     }
 }

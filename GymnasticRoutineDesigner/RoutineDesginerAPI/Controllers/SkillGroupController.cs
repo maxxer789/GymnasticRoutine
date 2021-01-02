@@ -19,11 +19,8 @@ namespace RoutineDesginerAPI.Controllers
     {
         private readonly SkillGroupRepository _Repo;
 
-        private readonly ISkillGroupContext _Context;
-
-        public SkillGroupController()
+        public SkillGroupController(ISkillGroupContext _Context)
         {
-            _Context = new SkillGroupContext();
             _Repo = new SkillGroupRepository(_Context);
         }
 

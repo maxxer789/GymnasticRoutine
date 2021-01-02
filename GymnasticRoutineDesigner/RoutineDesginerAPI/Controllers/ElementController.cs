@@ -21,11 +21,8 @@ namespace RoutineDesginerAPI.Controllers
     {
         private readonly ElementRepository _Repo;
 
-        private readonly IElementContext _IContext;
-
-        public ElementController()
+        public ElementController(IElementContext _IContext)
         {
-            _IContext = new ElementContext();
             _Repo = new ElementRepository(_IContext);
         }
 
