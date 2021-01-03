@@ -19,11 +19,21 @@ namespace DataAcces.DTOs
         [ForeignKey("SkillLevelId")]
         public virtual SkillLevelDTO SkillLevel { get; set; }
 
-        public virtual ICollection<RoutineElementDTO> Element { get; set; }
+        public virtual ICollection<RoutineElementDTO> Elements { get; set; }
 
         public RoutineDTO()
         {
 
+        }
+
+        public RoutineDTO(int id, decimal worth, string name, int apparatusId, int skillLevelId, ICollection<RoutineElementDTO> elements)
+        {
+            Id = id;
+            Worth = worth;
+            Name = name;
+            ApparatusId = apparatusId;
+            SkillLevelId = skillLevelId;
+            Elements = elements;
         }
     }
 }

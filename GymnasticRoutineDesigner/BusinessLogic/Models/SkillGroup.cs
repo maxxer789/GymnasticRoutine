@@ -21,5 +21,11 @@ namespace BusinessLogic.Models
             Name = name;
             Elements = elements;
         }
+
+        public SkillGroup(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

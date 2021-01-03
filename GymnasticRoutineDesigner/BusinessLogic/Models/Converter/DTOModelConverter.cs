@@ -46,6 +46,10 @@ namespace BusinessLogic.Models.Converter
         {
             return new SkillGroup(sg.Id, sg.Name, ElementDTOToModel(sg.Elements.ToList()));
         }
+        public static SkillGroup SkillGroupDTOToModelMinElements(SkillGroupDTO sg)
+        {
+            return new SkillGroup(sg.Id, sg.Name);
+        }
         public static List<SkillGroup> SkillGroupDTOToModel(List<SkillGroupDTO> sgs)
         {
             List<SkillGroup> skillGroups = new List<SkillGroup>();
@@ -59,6 +63,10 @@ namespace BusinessLogic.Models.Converter
         public static SkillGroupDTO ModelToSkillGroupDTO(SkillGroup sg)
         {
             return new SkillGroupDTO(sg.Id, sg.Name, ModelToElementDTO(sg.Elements.ToList()));
+        }
+        public static SkillGroupDTO ModelToSkillGroupDTOMinElements(SkillGroup sg)
+        {
+            return new SkillGroupDTO(sg.Id, sg.Name);
         }
         public static List<SkillGroupDTO> ModelToSkillGroupDTO(List<SkillGroup> sgs)
         {
@@ -75,7 +83,7 @@ namespace BusinessLogic.Models.Converter
         #region Element
         public static Element ElementDTOToModel(ElementDTO el)
         {
-            return new Element(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+            return new Element(el.Id, el.Priority, SkillGroupDTOToModelMinElements(el.SkillGroup), el.Name, el.Difficulty, el.Worth);
         }
         public static List<Element> ElementDTOToModel(List<ElementDTO> el)
         {
@@ -83,7 +91,7 @@ namespace BusinessLogic.Models.Converter
 
             foreach (ElementDTO e in el)
             {
-                elements.Add(new Element(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new Element(e.Id, e.Priority, SkillGroupDTOToModelMinElements(e.SkillGroup), e.Name, e.Difficulty, e.Worth));
             }
 
             return elements;
@@ -91,7 +99,7 @@ namespace BusinessLogic.Models.Converter
 
         public static ElementDTO ModelToElementDTO(Element el)
         {
-            return new ElementDTO(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+            return new ElementDTO(el.Id, el.Priority, el.SkillGroup.Id, el.Name, el.Difficulty, el.Worth);
         }
         public static List<ElementDTO> ModelToElementDTO(List<Element> el)
         {
@@ -99,11 +107,57 @@ namespace BusinessLogic.Models.Converter
 
             foreach (Element e in el)
             {
-                elements.Add(new ElementDTO(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new ElementDTO(e.Id, e.Priority, e.SkillGroup.Id, e.Name, e.Difficulty, e.Worth));
             }
 
             return elements;
         }
+
+        public static List<RoutineElementDTO> ModelToRoutineElementDTO(List<RoutineElement> re)
+        {
+            List<RoutineElementDTO> elements = new List<RoutineElementDTO>();
+
+            foreach (RoutineElement e in re)
+            {
+                elements.Add(new RoutineElementDTO(e.Id, e.RoutineId, e.ElementId));
+            }
+
+            return elements;
+        }
+
+        public static List<RoutineElement> RoutineElementDTOToModel(List<RoutineElementDTO> re)
+        {
+            List<RoutineElement> elements = new List<RoutineElement>();
+
+            foreach (RoutineElementDTO e in re)
+            {
+                elements.Add(new RoutineElement(e.Id, e.RoutineId, e.ElementId));
+            }
+
+            return elements;
+        }
+
+        #endregion
+        #region Routine
+
+        public static Routine RoutineDTOToModel(RoutineDTO r)
+        {
+            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillGroupDTOToModel(r.SkillLevel), RoutineElementDTOToModel(r.Elements.ToList()));
+        }
+
+        public static RoutineDTO ModelToRoutineDTO(Routine r)
+        {
+            return new RoutineDTO(r.Id, r.SkillLevel.Id, r.Name, r.Apparatus.Id, r.SkillLevel.Id, ModelToRoutineElementDTO(r.Elements.ToList()));
+        }
+
+        #endregion
+        #region SkillLevel
+
+        public static SkillLevel SkillGroupDTOToModel(SkillLevelDTO sl)
+        {
+            return new SkillLevel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
+        }
+
         #endregion
     }
 }
