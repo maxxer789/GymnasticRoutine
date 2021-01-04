@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GymnasticRoutineDesigner.Models;
 
 namespace RoutineDesginerAPI.Models
 {
     public class RoutineCreateViewModel
     {
         public string Name { get; set; }
-        public int ApparatusId { get; set; }
-        public int SkillLevelId { get; set; }
+        public ApparatusViewModel Apparatus { get; set; }
+        public SkillLevelViewModel SkillLevel { get; set; }
 
         public RoutineCreateViewModel()
         {
 
         }
 
-        public RoutineCreateViewModel(string name, int apparatusId, int skillLevelId)
+        public RoutineCreateViewModel(string name, ApparatusViewModel apparatus, SkillLevelViewModel skillLevel)
         {
             Name = name;
-            ApparatusId = apparatusId;
-            SkillLevelId = skillLevelId;
+            Apparatus = apparatus;
+            SkillLevel = skillLevel;
         }
     }
 }

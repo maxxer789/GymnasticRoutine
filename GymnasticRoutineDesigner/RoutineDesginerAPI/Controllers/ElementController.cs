@@ -70,7 +70,7 @@ namespace RoutineDesginerAPI.Controllers
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(new Element { Name = ecvm.Name, Difficulty = ecvm.Difficulty, Priority = ecvm.Priority, SkillGroupId = ecvm.SkillGroupId, Worth = ecvm.Worth }));
+                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(ViewModelConverter.ElementViewModelToElement(ecvm)));
                 return CreatedAtAction("elementById", new { id = createdElement.Id }, createdElement);
             }
             catch(Exception ex)

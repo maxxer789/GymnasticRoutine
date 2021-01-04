@@ -28,7 +28,7 @@ namespace RoutineDesginerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateRoutine([FromBody] RoutineCreateViewModel rcvm)
         {
-
+            return Ok();
         }
     }
 }

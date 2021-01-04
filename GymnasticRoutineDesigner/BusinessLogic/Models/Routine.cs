@@ -28,11 +28,11 @@ namespace BusinessLogic.Models
             Elements = elements;
         }
 
-        public Routine(int id, string name, Apparatus apparatus)
+        public Routine(string name, Apparatus apparatus, SkillLevel skillLevel)
         {
-            Id = id;
             Name = name;
             Apparatus = apparatus;
+            SkillLevel = skillLevel;
         }
     }
 }
