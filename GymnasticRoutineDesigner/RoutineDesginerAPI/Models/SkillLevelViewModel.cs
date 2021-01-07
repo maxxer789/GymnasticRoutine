@@ -16,5 +16,13 @@ namespace RoutineDesginerAPI.Models
         {
 
         }
+
+        public SkillLevelViewModel(int id, int level, string division, string ageGroup)
+        {
+            Id = id;
+            Level = level;
+            Division = division;
+            AgeGroup = ageGroup;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using DataAcces.Interfaces;
+﻿using BusinessLogic.Models;
+using DataAcces.Interfaces;
+using BusinessLogic.Models.Converter;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,20 @@ namespace BusinessLogic.Repositories
         public RoutineRepository(IRoutineContext context)
         {
             _Context = context;
+        }
+
+        public Routine Create(Routine rout)
+        {
+            if (rout.Name != null && rout.Name.Length >= 5)
+            {
+                return DTOModelConverter.RoutineDTOToModel(_Context.Create(DTOModelConverter.ModelToRoutineDTO(rout)));
+            }
+            else return new Routine();
+        }
+
+        public Routine GetById(int Id)
+        {
+            return DTOModelConverter.RoutineDTOToModel(_Context.GetById(Id));
         }
     }
 }

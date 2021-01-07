@@ -103,10 +103,11 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         }
         #endregion
         #region Routine
-        //public static RoutineViewModel RoutineToViewModel(Routine rout)
-        //{
-        //    return new ElementViewModel(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
-        //}
+
+        public static RoutineViewModel RoutineToViewModel(Routine rout)
+        {
+            return new RoutineViewModel(rout.Id, rout.Name, rout.Worth, ApparatusToViewModel(rout.Apparatus), SkillLevelToViewModel(rout.SkillLevel), ElementToViewModel(rout.Elements.ToList()));
+        }
 
         public static Routine ViewModelToRoutine(RoutineCreateViewModel rcvm)
         {
@@ -118,6 +119,10 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         public static SkillLevel ViewModelToSkillLevel(SkillLevelViewModel slvm)
         {
             return new SkillLevel(slvm.Id, slvm.Level, slvm.Division, slvm.AgeGroup);
+        }
+        public static SkillLevelViewModel SkillLevelToViewModel(SkillLevel sl)
+        {
+            return new SkillLevelViewModel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
         }
         #endregion
     }

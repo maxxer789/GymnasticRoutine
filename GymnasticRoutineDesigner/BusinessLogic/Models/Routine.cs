@@ -11,14 +11,14 @@ namespace BusinessLogic.Models
         public decimal Worth { get; set; }
         public Apparatus Apparatus { get; set; }
         public SkillLevel SkillLevel { get; set; }
-        public ICollection<RoutineElement> Elements { get; set; }
+        public ICollection<Element> Elements { get; set; }
 
         public Routine()
         {
 
         }
 
-        public Routine(int id, string name, decimal worth, Apparatus apparatus, SkillLevel skillLevel, ICollection<RoutineElement> elements)
+        public Routine(int id, string name, decimal worth, Apparatus apparatus, SkillLevel skillLevel, ICollection<Element> elements)
         {
             Id = id;
             Name = name;

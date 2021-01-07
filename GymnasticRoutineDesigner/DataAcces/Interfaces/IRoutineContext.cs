@@ -7,6 +7,7 @@ namespace DataAcces.Interfaces
 {
     public interface IRoutineContext
     {
-        RoutineDTO Create();
+        RoutineDTO Create(RoutineDTO rout);
+        RoutineDTO GetById(int Id);
     }
 }
