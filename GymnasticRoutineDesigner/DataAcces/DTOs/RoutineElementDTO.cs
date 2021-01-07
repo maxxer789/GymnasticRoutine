@@ -19,6 +19,12 @@ namespace DataAcces.DTOs
 
         }
 
+        public RoutineElementDTO(int routineId, int elementId)
+        {
+            RoutineId = routineId;
+            ElementId = elementId;
+        }
+
         public RoutineElementDTO(int id, int routineId, int elementId)
         {
             Id = id;

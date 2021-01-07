@@ -116,6 +116,19 @@ namespace BusinessLogic.Models.Converter
 
             return elements;
         }
+        public static ElementDTO RoutineElementDTOToElementDTO(RoutineElementDTO re)
+        {
+            return new ElementDTO(re.Element.Id, re.Element.Priority, re.Element.Name, re.Element.Difficulty, re.Element.Worth);
+        }
+        public static List<ElementDTO> RoutineElementDTOToElementDTO(List<RoutineElementDTO> res)
+        {
+            List<ElementDTO> redtos = new List<ElementDTO>();
+            foreach (RoutineElementDTO re in res)
+            {
+                redtos.Add(new ElementDTO(re.Element.Id, re.Element.Priority, re.Element.Name, re.Element.Difficulty, re.Element.Worth));
+            }
+            return redtos;
+        }
 
         public static List<RoutineElement> RoutineElementDTOToModel(List<RoutineElementDTO> re)
         {
@@ -129,17 +142,27 @@ namespace BusinessLogic.Models.Converter
             return elements;
         }
 
+        public static RoutineElementDTO RoutineWithElmentToRoutineElmentDTO(int routineId, int elementId)
+        {
+            return new RoutineElementDTO(routineId, elementId);
+        }
+
         #endregion
         #region Routine
 
         public static Routine RoutineDTOToModel(RoutineDTO r)
         {
-            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillGroupDTOToModel(r.SkillLevel), RoutineElementDTOToModel(r.Elements.ToList()));
+            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillGroupDTOToModel(r.SkillLevel), ElementDTOToModel(RoutineElementDTOToElementDTO(r.Elements.ToList())));
         }
 
         public static RoutineDTO ModelToRoutineDTO(Routine r)
         {
-            return new RoutineDTO(r.Id, r.SkillLevel.Id, r.Name, r.Apparatus.Id, r.SkillLevel.Id, ModelToRoutineElementDTO(r.Elements.ToList()));
+            List<RoutineElementDTO> res = new List<RoutineElementDTO>();
+            foreach(Element e in r.Elements)
+            {
+                res.Add(RoutineWithElmentToRoutineElmentDTO(r.Id, e.Id));
+            }
+            return new RoutineDTO(r.Id, r.SkillLevel.Id, r.Name, r.Apparatus.Id, r.SkillLevel.Id, res);
         }
 
         #endregion
@@ -149,6 +172,9 @@ namespace BusinessLogic.Models.Converter
         {
             return new SkillLevel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
         }
+
+        #endregion
+        #region RoutineElement
 
         #endregion
     }

@@ -18,7 +18,7 @@ namespace BusinessLogic.Models
 
         }
 
-        public Routine(int id, string name, decimal worth, Apparatus apparatus, SkillLevel skillLevel, ICollection<Element> elements)
+        public Routine(int id, string name, decimal worth, Apparatus apparatus, SkillLevel skillLevel, List<Element> elements)
         {
             Id = id;
             Name = name;
