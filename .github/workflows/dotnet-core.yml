@@ -30,6 +30,9 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
       working-directory: ./GymnasticRoutineDesigner
 
+    - name: Check out code
+      uses: actions/checkout@v2
+
     - name: Build and push Docker images
       uses: docker/build-push-action@v1
       with:
