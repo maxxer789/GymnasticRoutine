@@ -17,12 +17,24 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1
+
     - name: Install dependencies
       run: dotnet restore
       working-directory: ./GymnasticRoutineDesigner
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ./GymnasticRoutineDesigner
+
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: ./GymnasticRoutineDesigner
+
+    - name: Build and push Docker Image
+	uses: mr-smithers-excellent/docker-build-push@v4
+	with:
+	image: maxvddussen/gymnasticroutine
+	registry: docker.io
+	username: ${{ secrets.DOCKER_USERNAME }}
+	password: ${{ secrets.DOCKER_PASSWORD }}
+  	
