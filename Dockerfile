@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /GymnasticRoutineDesigner
 
 # Copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY GymnasticRoutineDesigner.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
