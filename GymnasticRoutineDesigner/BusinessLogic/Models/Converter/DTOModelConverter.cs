@@ -152,15 +152,18 @@ namespace BusinessLogic.Models.Converter
 
         public static Routine RoutineDTOToModel(RoutineDTO r)
         {
-            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillGroupDTOToModel(r.SkillLevel), ElementDTOToModel(RoutineElementDTOToElementDTO(r.Elements.ToList())));
+            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillLevelDTOToModel(r.SkillLevel), ElementDTOToModel(RoutineElementDTOToElementDTO(r.Elements.ToList())));
         }
 
         public static RoutineDTO ModelToRoutineDTO(Routine r)
         {
             List<RoutineElementDTO> res = new List<RoutineElementDTO>();
-            foreach(Element e in r.Elements)
+            if (r.Elements.Count > 0)
             {
-                res.Add(RoutineWithElmentToRoutineElmentDTO(r.Id, e.Id));
+                foreach (Element e in r.Elements)
+                {
+                    res.Add(RoutineWithElmentToRoutineElmentDTO(r.Id, e.Id));
+                }
             }
             return new RoutineDTO(r.Id, r.SkillLevel.Id, r.Name, r.Apparatus.Id, r.SkillLevel.Id, res);
         }
@@ -168,9 +171,13 @@ namespace BusinessLogic.Models.Converter
         #endregion
         #region SkillLevel
 
-        public static SkillLevel SkillGroupDTOToModel(SkillLevelDTO sl)
+        public static SkillLevel SkillLevelDTOToModel(SkillLevelDTO sl)
         {
             return new SkillLevel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
+        }
+        public static SkillLevelDTO ModelToSkillLevelDTO(SkillLevel sl)
+        {
+            return new SkillLevelDTO(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
         }
 
         #endregion

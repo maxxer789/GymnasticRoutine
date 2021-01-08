@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.Repositories;
+using BusinessLogic.Models;
 using DataAcces.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,14 @@ namespace RoutineDesginerAPI.Controllers
     public class RoutineController : ControllerBase
     {
         private readonly RoutineRepository _Repo;
+        private readonly ApparatusRepository _AppRepo;
+        private readonly SkillLevelRepository _SkLRepo;
 
-        public RoutineController(IRoutineContext _Context)
+        public RoutineController(IRoutineContext _Context, IApparatusContext _AppContext, ISkillLevelContext _SkLContext)
         {
             _Repo = new RoutineRepository(_Context);
+            _AppRepo = new ApparatusRepository(_AppContext);
+            _SkLRepo = new SkillLevelRepository(_SkLContext);
         }
         
         [HttpGet]
@@ -27,7 +32,7 @@ namespace RoutineDesginerAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetElementById(int Id)
+        public IActionResult GetRputineById(int Id)
         {
             try
             {
@@ -66,7 +71,9 @@ namespace RoutineDesginerAPI.Controllers
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                RoutineViewModel createdRoutine = ViewModelConverter.RoutineToViewModel(_Repo.Create(ViewModelConverter.ViewModelToRoutine(rcvm)));
+                
+                RoutineViewModel createdRoutine = ViewModelConverter.RoutineToViewModel(_Repo.Create(new Routine(rcvm.Name, _AppRepo.GetById(rcvm.ApparatusId), _SkLRepo.GetById(rcvm.SkillLevelId))));
+
                 if (createdRoutine.Id > 0)
                 {
                     return CreatedAtAction("routineById", new { Id = createdRoutine.Id }, createdRoutine);

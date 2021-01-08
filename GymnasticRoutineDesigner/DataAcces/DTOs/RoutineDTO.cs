@@ -10,7 +10,7 @@ namespace DataAcces.DTOs
     {
         [Key]
         public int Id { get; set; }
-        public decimal Worth { get; set; }
+        public decimal? Worth { get; set; }
         public string Name { get; set; }
         public int ApparatusId { get; set; }
         [ForeignKey("ApparatusId")]

@@ -109,11 +109,6 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
             return new RoutineViewModel(rout.Id, rout.Name, rout.Worth, ApparatusToViewModel(rout.Apparatus), SkillLevelToViewModel(rout.SkillLevel), ElementToViewModel(rout.Elements.ToList()));
         }
 
-        public static Routine ViewModelToRoutine(RoutineCreateViewModel rcvm)
-        {
-            return new Routine(rcvm.Name, ApparatusViewModelToApparatus(rcvm.Apparatus), ViewModelToSkillLevel(rcvm.SkillLevel));
-        }
-
         #endregion
         #region SkillLevel
         public static SkillLevel ViewModelToSkillLevel(SkillLevelViewModel slvm)

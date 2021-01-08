@@ -10,7 +10,7 @@ namespace RoutineDesginerAPI.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Worth { get; set; }
+        public decimal? Worth { get; set; }
         public ApparatusViewModel Apparatus { get; set; }
         public SkillLevelViewModel SkillLevel { get; set; }
         public ICollection<ElementViewModel> Elements { get; set; }
@@ -20,7 +20,7 @@ namespace RoutineDesginerAPI.Models
 
         }
 
-        public RoutineViewModel(int id, string name, decimal worth, ApparatusViewModel apparatus, SkillLevelViewModel skillLevel, ICollection<ElementViewModel> elements)
+        public RoutineViewModel(int id, string name, decimal? worth, ApparatusViewModel apparatus, SkillLevelViewModel skillLevel, ICollection<ElementViewModel> elements)
         {
             Id = id;
             Name = name;

@@ -9,19 +9,18 @@ namespace RoutineDesginerAPI.Models
     public class RoutineCreateViewModel
     {
         public string Name { get; set; }
-        public ApparatusViewModel Apparatus { get; set; }
-        public SkillLevelViewModel SkillLevel { get; set; }
+        public int ApparatusId { get; set; }
+        public int SkillLevelId { get; set; }
 
         public RoutineCreateViewModel()
         {
 
         }
-
-        public RoutineCreateViewModel(string name, ApparatusViewModel apparatus, SkillLevelViewModel skillLevel)
+        public RoutineCreateViewModel(string name, int apparatusId, int skillLevelId)
         {
             Name = name;
-            Apparatus = apparatus;
-            SkillLevel = skillLevel;
+            ApparatusId = apparatusId;
+            SkillLevelId = skillLevelId;
         }
     }
 }

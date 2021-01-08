@@ -15,5 +15,12 @@ namespace DataAcces.DTOs
         {
 
         }
+        public SkillLevelDTO(int id, int level, string division, string ageGroup)
+        {
+            Id = id;
+            Level = level;
+            Division = division;
+            AgeGroup = ageGroup;
+        }
     }
 }
