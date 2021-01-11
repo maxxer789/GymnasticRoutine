@@ -9,5 +9,7 @@ namespace DataAcces.Interfaces
     {
         IReadOnlyList<SkillGroupDTO> GetAll();
 
+        SkillGroupDTO GetElementsBySkillGroup(int Id);
+
     }
 }

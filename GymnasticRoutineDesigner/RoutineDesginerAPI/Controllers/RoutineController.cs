@@ -28,11 +28,11 @@ namespace RoutineDesginerAPI.Controllers
         }
         
         [HttpGet]
-        [Route("byId/{Id}"), ActionName("routineById")]
+        [Route("{Id}"), ActionName("routineById")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetRputineById(int Id)
+        public IActionResult GetRoutineById(int Id)
         {
             try
             {
@@ -40,12 +40,14 @@ namespace RoutineDesginerAPI.Controllers
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                RoutineViewModel element = ViewModelConverter.RoutineToViewModel(_Repo.GetById(Id));
-                if (element == null)
+                RoutineViewModel routine = ViewModelConverter.RoutineToViewModel(_Repo.GetById(Id));
+
+                if (routine == null)
                 {
                     return NotFound();
                 }
-                return Ok(element);
+
+                return Ok(routine);
             }
             catch (Exception ex)
             {

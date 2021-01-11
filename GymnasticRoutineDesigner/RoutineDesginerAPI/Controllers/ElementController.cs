@@ -27,7 +27,7 @@ namespace RoutineDesginerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("byId/{Id}"), ActionName("elementById")]
+        [Route("{Id}"), ActionName("elementById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -34,9 +34,41 @@ namespace RoutineDesginerAPI.Controllers
             try
             {
                 List<SkillGroupViewModel> skillGroups = ViewModelConverter.SkillGroupToViewModel(_Repo.GetAll().ToList());
+
                 return Ok(skillGroups.AsReadOnly());
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+        [HttpGet]
+        [Route("{SkillGroupId}/elements"), ActionName("elementFromSkillGroup")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetElementsFromSkillGroup(int SkillGroupId)
+        {
+            try
+            {
+                if (SkillGroupId <= 0)
+                {
+                    return BadRequest("Request doesn't pass validation");
+                }
+
+                SkillGroupViewModel skillGroup = ViewModelConverter.SkillGroupToViewModel(_Repo.GetElementsBySkillGroup(SkillGroupId));
+
+                if (skillGroup == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(skillGroup);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return StatusCode(500, "Internal server error");

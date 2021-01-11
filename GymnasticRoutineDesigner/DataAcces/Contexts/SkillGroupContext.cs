@@ -24,7 +24,12 @@ namespace DataAcces.Contexts
             {
                 sg.Elements = Element.Where(e => e.SkillGroupId == sg.Id).ToList();
             }
-            return groups;
+            return groups.AsReadOnly();
+        }
+
+        public SkillGroupDTO GetElementsBySkillGroup(int Id)
+        {
+            return SkillGroup.Where(sg => sg.Id == Id).Include(sg => sg.Elements).FirstOrDefault();
         }
     }
 }

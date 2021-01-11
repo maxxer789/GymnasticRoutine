@@ -1,5 +1,6 @@
 ﻿using DataAcces.DTOs;
 using DataAcces.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace DataAcces.Contexts
 
         public RoutineDTO GetById(int Id)
         {
-            return Routine.ToList().Where(r => r.Id == Id).FirstOrDefault();
+            RoutineDTO routine = Routine.Where(r => r.Id == Id).Include(r => r.Elements).Include(r => r.Apparatus).Include(r => r.SkillLevel).FirstOrDefault();
+            routine.Apparatus.SkillGroups = FillSkillGroups(routine.Apparatus);
+            return routine;
         }
 
         private List<SkillGroupDTO> FillSkillGroups(ApparatusDTO app)
