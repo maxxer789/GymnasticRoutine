@@ -91,5 +91,41 @@ namespace RoutineDesginerAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpPost]
+        [Route("addElement"), ActionName("addElement")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult AddElementToRoutine([FromBody] AddElementToRoutineViewModel etrv)
+        {
+            try
+            {
+                if (etrv == null)
+                {
+                    return BadRequest("Empty body");
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Request doesn't pass validation");
+                }
+
+                RoutineViewModel createdRoutine = ViewModelConverter.RoutineToViewModel(_Repo.AddElement(ViewModelConverter.ViewModelToRoutineElement(etrv)));
+
+                if (createdRoutine.Id > 0)
+                {
+                    return CreatedAtAction("routineById", new { Id = createdRoutine.Id }, createdRoutine);
+                }
+                else
+                {
+                    return StatusCode(500, "Internal server error");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

@@ -21,5 +21,11 @@ namespace BusinessLogic.Models
             RoutineId = routineId;
             ElementId = elementId;
         }
+
+        public RoutineElement(int routineId, int elementId)
+        {
+            RoutineId = routineId;
+            ElementId = elementId;
+        }
     }
 }

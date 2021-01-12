@@ -91,7 +91,7 @@ namespace BusinessLogic.Models.Converter
 
         public static ElementDTO ModelToElementDTO(Element el)
         {
-            return new ElementDTO(el.Id, el.Priority, el.Name, el.Difficulty, el.Worth);
+            return new ElementDTO(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
         }
         public static List<ElementDTO> ModelToElementDTO(List<Element> el)
         {
@@ -99,7 +99,7 @@ namespace BusinessLogic.Models.Converter
 
             foreach (Element e in el)
             {
-                elements.Add(new ElementDTO(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new ElementDTO(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
             }
 
             return elements;
@@ -182,6 +182,15 @@ namespace BusinessLogic.Models.Converter
 
         #endregion
         #region RoutineElement
+
+        public static RoutineElement RoutineElementDTOToModel(RoutineElementDTO Re)
+        {
+            return new RoutineElement(Re.RoutineId, Re.ElementId);
+        }
+        public static RoutineElementDTO ModelToRoutineElementDTO(RoutineElement Re)
+        {
+            return new RoutineElementDTO(Re.RoutineId, Re.ElementId);
+        }
 
         #endregion
     }

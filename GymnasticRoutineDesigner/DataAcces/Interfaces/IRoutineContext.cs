@@ -9,5 +9,6 @@ namespace DataAcces.Interfaces
     {
         RoutineDTO Create(RoutineDTO rout);
         RoutineDTO GetById(int Id);
+        RoutineDTO AddElement(RoutineElementDTO Re);
     }
 }

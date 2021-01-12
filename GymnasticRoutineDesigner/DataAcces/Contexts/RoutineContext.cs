@@ -27,6 +27,15 @@ namespace DataAcces.Contexts
             return routine;
         }
 
+        public RoutineDTO AddElement(RoutineElementDTO Re)
+        {
+            RoutineElement.Add(Re);
+            SaveChanges();
+            RoutineDTO routine = Routine.Where(r => r.Id == Re.RoutineId).Include(r => r.Elements).Include(r => r.Apparatus).Include(r => r.SkillLevel).FirstOrDefault();
+            routine.Apparatus.SkillGroups = FillSkillGroups(routine.Apparatus);
+            return routine;
+        }
+
         private List<SkillGroupDTO> FillSkillGroups(ApparatusDTO app)
         {
             List<SkillGroupDTO> sgs = SkillGroup.Where(sg => sg.ApparatusId == app.Id).ToList();

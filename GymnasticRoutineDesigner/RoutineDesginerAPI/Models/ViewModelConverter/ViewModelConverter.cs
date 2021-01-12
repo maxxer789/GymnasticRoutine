@@ -89,7 +89,7 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         }
         public static Element ElementViewModelToElement(ElementCreateViewModel el)
         {
-            return new Element(el.Priority, el.Name, el.Difficulty, el.Worth);
+            return new Element(el.Priority, el.Name, el.SkillGroupId, el.Difficulty, el.Worth);
         }
 
         public static List<Element> ElementViewModelToElement(List<ElementViewModel> el)
@@ -119,6 +119,14 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         {
             return new SkillLevelViewModel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
         }
+        #endregion
+        #region RoutineElement
+
+        public static RoutineElement ViewModelToRoutineElement(AddElementToRoutineViewModel ertv)
+        {
+            return new RoutineElement(ertv.RoutineId, ertv.ElementId);
+        }
+
         #endregion
     }
 }

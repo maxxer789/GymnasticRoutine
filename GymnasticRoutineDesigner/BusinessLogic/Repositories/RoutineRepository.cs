@@ -28,5 +28,10 @@ namespace BusinessLogic.Repositories
         {
             return DTOModelConverter.RoutineDTOToModel(_Context.GetById(Id));
         }
+
+        public Routine AddElement(RoutineElement Re)
+        {
+            return DTOModelConverter.RoutineDTOToModel(_Context.AddElement(DTOModelConverter.ModelToRoutineElementDTO(Re)));
+        }
     }
 }
