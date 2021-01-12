@@ -14,5 +14,22 @@ namespace DataAcces.DTOs
         public int ElementId { get; set; }
         [ForeignKey("ElementId")]
         public virtual ElementDTO Element { get; set; }
+        public RoutineElementDTO()
+        {
+
+        }
+
+        public RoutineElementDTO(int routineId, int elementId)
+        {
+            RoutineId = routineId;
+            ElementId = elementId;
+        }
+
+        public RoutineElementDTO(int id, int routineId, int elementId)
+        {
+            Id = id;
+            RoutineId = routineId;
+            ElementId = elementId;
+        }
     }
 }

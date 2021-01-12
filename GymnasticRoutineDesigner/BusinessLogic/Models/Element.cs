@@ -19,9 +19,17 @@ namespace BusinessLogic.Models
            
         }
 
-        public Element(int id, int priority, int skillGroupId, string name, string difficulty, double worth)
+        public Element(int id, int priority, string name, string difficulty, double worth)
         {
             Id = id;
+            Priority = priority;
+            Name = name;
+            Difficulty = difficulty;
+            Worth = worth;
+        }
+
+        public Element(int priority,  string name, int skillGroupId, string difficulty, double worth)
+        {
             Priority = priority;
             SkillGroupId = skillGroupId;
             Name = name;

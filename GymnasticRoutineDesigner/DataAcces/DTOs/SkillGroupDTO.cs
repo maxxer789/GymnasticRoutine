@@ -28,5 +28,10 @@ namespace DataAcces.DTOs
             Name = name;
             Elements = elements;
         }
+        public SkillGroupDTO(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

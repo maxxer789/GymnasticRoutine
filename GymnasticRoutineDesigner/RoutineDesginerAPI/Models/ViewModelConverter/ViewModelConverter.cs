@@ -43,7 +43,7 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         {
             return new SkillGroupViewModel(sg.Id, sg.Name, ElementToViewModel(sg.Elements.ToList()));
         }
-        public static List<SkillGroupViewModel> SkillGroupToViewModel (List<SkillGroup> sgs)
+        public static List<SkillGroupViewModel> SkillGroupToViewModel(List<SkillGroup> sgs)
         {
             List<SkillGroupViewModel> skillGroups = new List<SkillGroupViewModel>();
             foreach (SkillGroup sg in sgs)
@@ -57,7 +57,8 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         {
             return new SkillGroup(sg.Id, sg.Name, ElementViewModelToElement(sg.Elements.ToList()));
         }
-        public static List<SkillGroup> SkillGroupViewModelToSkillGroup (List<SkillGroupViewModel> sgs)
+        
+        public static List<SkillGroup> SkillGroupViewModelToSkillGroup(List<SkillGroupViewModel> sgs)
         {
             List<SkillGroup> skillGroups = new List<SkillGroup>();
             foreach (SkillGroupViewModel sg in sgs)
@@ -70,31 +71,62 @@ namespace RoutineDesginerAPI.Models.ViewModelConverter
         #region Element
         public static ElementViewModel ElementToViewModel(Element el)
         {
-            return new ElementViewModel(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+            return new ElementViewModel(el.Id, el.Priority, el.Name, el.Difficulty, el.Worth);
         }
         public static List<ElementViewModel> ElementToViewModel(List<Element> el)
         {
             List<ElementViewModel> elements = new List<ElementViewModel>();
-            foreach(Element e in el)
+            foreach (Element e in el)
             {
-                elements.Add(new ElementViewModel(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new ElementViewModel(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
             }
             return elements;
         }
 
         public static Element ElementViewModelToElement(ElementViewModel el)
         {
-            return new Element(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+            return new Element(el.Id, el.Priority,  el.Name, el.Difficulty, el.Worth);
         }
+        public static Element ElementViewModelToElement(ElementCreateViewModel el)
+        {
+            return new Element(el.Priority, el.Name, el.SkillGroupId, el.Difficulty, el.Worth);
+        }
+
         public static List<Element> ElementViewModelToElement(List<ElementViewModel> el)
         {
             List<Element> elements = new List<Element>();
-            foreach(ElementViewModel e in el)
+            foreach (ElementViewModel e in el)
             {
-                elements.Add(new Element(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new Element(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
             }
             return elements;
         }
+        #endregion
+        #region Routine
+
+        public static RoutineViewModel RoutineToViewModel(Routine rout)
+        {
+            return new RoutineViewModel(rout.Id, rout.Name, rout.Worth, ApparatusToViewModel(rout.Apparatus), SkillLevelToViewModel(rout.SkillLevel), ElementToViewModel(rout.Elements.ToList()));
+        }
+
+        #endregion
+        #region SkillLevel
+        public static SkillLevel ViewModelToSkillLevel(SkillLevelViewModel slvm)
+        {
+            return new SkillLevel(slvm.Id, slvm.Level, slvm.Division, slvm.AgeGroup);
+        }
+        public static SkillLevelViewModel SkillLevelToViewModel(SkillLevel sl)
+        {
+            return new SkillLevelViewModel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
+        }
+        #endregion
+        #region RoutineElement
+
+        public static RoutineElement ViewModelToRoutineElement(AddElementToRoutineViewModel ertv)
+        {
+            return new RoutineElement(ertv.RoutineId, ertv.ElementId);
+        }
+
         #endregion
     }
 }

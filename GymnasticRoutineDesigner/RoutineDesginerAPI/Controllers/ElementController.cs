@@ -21,16 +21,13 @@ namespace RoutineDesginerAPI.Controllers
     {
         private readonly ElementRepository _Repo;
 
-        private readonly IElementContext _IContext;
-
-        public ElementController()
+        public ElementController(IElementContext _IContext)
         {
-            _IContext = new ElementContext();
             _Repo = new ElementRepository(_IContext);
         }
 
         [HttpGet]
-        [Route("byId/{Id}"), ActionName("elementById")]
+        [Route("{Id}"), ActionName("elementById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -73,7 +70,7 @@ namespace RoutineDesginerAPI.Controllers
                 {
                     return BadRequest("Request doesn't pass validation");
                 }
-                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(new Element { Name = ecvm.Name, Difficulty = ecvm.Difficulty, Priority = ecvm.Priority, SkillGroupId = ecvm.SkillGroupId, Worth = ecvm.Worth }));
+                ElementViewModel createdElement = ViewModelConverter.ElementToViewModel(_Repo.Create(ViewModelConverter.ElementViewModelToElement(ecvm)));
                 return CreatedAtAction("elementById", new { id = createdElement.Id }, createdElement);
             }
             catch(Exception ex)

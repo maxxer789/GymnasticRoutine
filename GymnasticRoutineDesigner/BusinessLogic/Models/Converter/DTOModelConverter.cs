@@ -75,7 +75,7 @@ namespace BusinessLogic.Models.Converter
         #region Element
         public static Element ElementDTOToModel(ElementDTO el)
         {
-            return new Element(el.Id, el.Priority, el.SkillGroupId, el.Name, el.Difficulty, el.Worth);
+            return new Element(el.Id, el.Priority, el.Name, el.Difficulty, el.Worth);
         }
         public static List<Element> ElementDTOToModel(List<ElementDTO> el)
         {
@@ -83,7 +83,7 @@ namespace BusinessLogic.Models.Converter
 
             foreach (ElementDTO e in el)
             {
-                elements.Add(new Element(e.Id, e.Priority, e.SkillGroupId, e.Name, e.Difficulty, e.Worth));
+                elements.Add(new Element(e.Id, e.Priority, e.Name, e.Difficulty, e.Worth));
             }
 
             return elements;
@@ -104,6 +104,94 @@ namespace BusinessLogic.Models.Converter
 
             return elements;
         }
+
+        public static List<RoutineElementDTO> ModelToRoutineElementDTO(List<RoutineElement> re)
+        {
+            List<RoutineElementDTO> elements = new List<RoutineElementDTO>();
+
+            foreach (RoutineElement e in re)
+            {
+                elements.Add(new RoutineElementDTO(e.Id, e.RoutineId, e.ElementId));
+            }
+
+            return elements;
+        }
+        public static ElementDTO RoutineElementDTOToElementDTO(RoutineElementDTO re)
+        {
+            return new ElementDTO(re.Element.Id, re.Element.Priority, re.Element.Name, re.Element.Difficulty, re.Element.Worth);
+        }
+        public static List<ElementDTO> RoutineElementDTOToElementDTO(List<RoutineElementDTO> res)
+        {
+            List<ElementDTO> redtos = new List<ElementDTO>();
+            foreach (RoutineElementDTO re in res)
+            {
+                redtos.Add(new ElementDTO(re.Element.Id, re.Element.Priority, re.Element.Name, re.Element.Difficulty, re.Element.Worth));
+            }
+            return redtos;
+        }
+
+        public static List<RoutineElement> RoutineElementDTOToModel(List<RoutineElementDTO> re)
+        {
+            List<RoutineElement> elements = new List<RoutineElement>();
+
+            foreach (RoutineElementDTO e in re)
+            {
+                elements.Add(new RoutineElement(e.Id, e.RoutineId, e.ElementId));
+            }
+
+            return elements;
+        }
+
+        public static RoutineElementDTO RoutineWithElmentToRoutineElmentDTO(int routineId, int elementId)
+        {
+            return new RoutineElementDTO(routineId, elementId);
+        }
+
+        #endregion
+        #region Routine
+
+        public static Routine RoutineDTOToModel(RoutineDTO r)
+        {
+            return new Routine(r.Id, r.Name, r.Worth, ApparatusDTOToModel(r.Apparatus), SkillLevelDTOToModel(r.SkillLevel), ElementDTOToModel(RoutineElementDTOToElementDTO(r.Elements.ToList())));
+        }
+
+        public static RoutineDTO ModelToRoutineDTO(Routine r)
+        {
+            List<RoutineElementDTO> res = new List<RoutineElementDTO>();
+            if (r.Elements.Count > 0)
+            {
+                foreach (Element e in r.Elements)
+                {
+                    res.Add(RoutineWithElmentToRoutineElmentDTO(r.Id, e.Id));
+                }
+            }
+            return new RoutineDTO(r.Id, r.SkillLevel.Id, r.Name, r.Apparatus.Id, r.SkillLevel.Id, res);
+        }
+
+        #endregion
+        #region SkillLevel
+
+        public static SkillLevel SkillLevelDTOToModel(SkillLevelDTO sl)
+        {
+            return new SkillLevel(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
+        }
+        public static SkillLevelDTO ModelToSkillLevelDTO(SkillLevel sl)
+        {
+            return new SkillLevelDTO(sl.Id, sl.Level, sl.Division, sl.AgeGroup);
+        }
+
+        #endregion
+        #region RoutineElement
+
+        public static RoutineElement RoutineElementDTOToModel(RoutineElementDTO Re)
+        {
+            return new RoutineElement(Re.RoutineId, Re.ElementId);
+        }
+        public static RoutineElementDTO ModelToRoutineElementDTO(RoutineElement Re)
+        {
+            return new RoutineElementDTO(Re.RoutineId, Re.ElementId);
+        }
+
         #endregion
     }
 }

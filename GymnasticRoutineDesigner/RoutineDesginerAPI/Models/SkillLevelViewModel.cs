@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DataAcces.DTOs
+namespace RoutineDesginerAPI.Models
 {
-    public class SkillLevelDTO
+    public class SkillLevelViewModel
     {
         public int Id { get; set; }
         public int Level { get; set; }
         public string Division { get; set; }
         public string AgeGroup { get; set; }
 
-        public SkillLevelDTO()
+        public SkillLevelViewModel()
         {
 
         }
-        public SkillLevelDTO(int id, int level, string division, string ageGroup)
+
+        public SkillLevelViewModel(int id, int level, string division, string ageGroup)
         {
             Id = id;
             Level = level;

@@ -36,5 +36,14 @@ namespace DataAcces.DTOs
             Difficulty = difficulty;
             Worth = worth;
         }
+
+        public ElementDTO(int id, int priority, string name, string difficulty, double worth)
+        {
+            Id = id;
+            Priority = priority;
+            Name = name;
+            Difficulty = difficulty;
+            Worth = worth;
+        }
     }
 }
