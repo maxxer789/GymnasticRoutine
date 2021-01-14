@@ -8,9 +8,9 @@ namespace BusinessLogic.Models
     {
         public string Message { get; set; }
 
-        public Notification(string message)
+        public Notification()
         {
-            Message = message;
+            
         }
     }
 }
