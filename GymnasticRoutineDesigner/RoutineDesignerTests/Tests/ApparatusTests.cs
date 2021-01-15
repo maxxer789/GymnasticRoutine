@@ -4,8 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoutineDesignerTests.MockContexts;
 using BusinessLogic.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RoutineDesignerTests.Tests
 {

@@ -8,7 +8,7 @@ namespace BusinessLogic.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal? Worth { get; set; }
+        public double? Worth { get; set; }
         public Apparatus Apparatus { get; set; }
         public SkillLevel SkillLevel { get; set; }
         public ICollection<Element> Elements { get; set; } = new List<Element>();
@@ -18,7 +18,7 @@ namespace BusinessLogic.Models
 
         }
 
-        public Routine(int id, string name, decimal? worth, Apparatus apparatus, SkillLevel skillLevel, List<Element> elements)
+        public Routine(int id, string name, double? worth, Apparatus apparatus, SkillLevel skillLevel, List<Element> elements)
         {
             Id = id;
             Name = name;

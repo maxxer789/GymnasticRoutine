@@ -10,7 +10,7 @@ namespace DataAcces.DTOs
     {
         [Key]
         public int Id { get; set; }
-        public decimal? Worth { get; set; }
+        public double? Worth { get; set; }
         public string Name { get; set; }
         public int ApparatusId { get; set; }
         [ForeignKey("ApparatusId")]
@@ -26,7 +26,7 @@ namespace DataAcces.DTOs
 
         }
 
-        public RoutineDTO(int id, decimal worth, string name, int apparatusId, int skillLevelId, ICollection<RoutineElementDTO> elements)
+        public RoutineDTO(int id, double worth, string name, int apparatusId, int skillLevelId, ICollection<RoutineElementDTO> elements)
         {
             Id = id;
             Worth = worth;

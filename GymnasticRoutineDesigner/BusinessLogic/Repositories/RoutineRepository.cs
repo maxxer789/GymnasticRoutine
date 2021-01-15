@@ -26,7 +26,14 @@ namespace BusinessLogic.Repositories
 
         public Routine GetById(int Id)
         {
-            return DTOModelConverter.RoutineDTOToModel(_Context.GetById(Id));
+            try
+            {
+                return DTOModelConverter.RoutineDTOToModel(_Context.GetById(Id));
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         public Routine AddElement(RoutineElement Re)
